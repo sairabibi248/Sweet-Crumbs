@@ -12,7 +12,7 @@ const links = [
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 bg-[#1F2937] p-5">
+  <aside className="w-64 bg-[#1F2937] p-5 dark:bg-[#0B0C0E]">
       <div className="flex items-center gap-3 mb-8">
         <img
           src={logoImg}
