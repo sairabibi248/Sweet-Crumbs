@@ -37,6 +37,10 @@ export const useInventory = () => {
     };
   }, [items]);
 
+  const lowStockItems = useMemo(() => {
+    return items.filter((item) => item.quantity < lowStockLimit);
+  }, [items]);
+
   const deleteMutation = useMutation({
     mutationFn: deleteItem,
     onSuccess: () => {
@@ -51,26 +55,31 @@ export const useInventory = () => {
     },
   });
 
-const updateMutation = useMutation({
-  mutationFn: updateItem,
+  const updateMutation = useMutation({
+    mutationKey: ["updateItem"],
+    mutationFn: updateItem,
 
-  onMutate: (updatedItem: Item) => {
-    queryClient.setQueryData<Item[]>(["items"], (oldItems) => {
-      if (!oldItems) return [];
+    onMutate: async (updatedItem: Item) => {
+      await queryClient.cancelQueries({ queryKey: ["items"] });
 
-      return oldItems.map((item) => {
-        if (item.id === updatedItem.id) {
-          return updatedItem;
-        }
-        return item;
+      queryClient.setQueryData<Item[]>(["items"], (oldItems) => {
+        if (!oldItems) return [];
+
+        return oldItems.map((item) => {
+          if (item.id === updatedItem.id) {
+            return updatedItem;
+          }
+          return item;
+        });
       });
-    });
-  },
+    },
 
-  onSettled: () => {
-    queryClient.invalidateQueries({ queryKey: ["items"] });
-  },
-});
+    onSettled: () => {
+      if (queryClient.isMutating({ mutationKey: ["updateItem"] }) === 1) {
+        queryClient.invalidateQueries({ queryKey: ["items"] });
+      }
+    },
+  });
 
   const changeQuantity = (item: Item, amount: number) => {
     const newQuantity = Math.max(0, item.quantity + amount);
@@ -80,6 +89,7 @@ const updateMutation = useMutation({
   return {
     items: filteredItems,
     stats,
+    lowStockItems,
     isLoading,
     isError,
     searchTerm,
