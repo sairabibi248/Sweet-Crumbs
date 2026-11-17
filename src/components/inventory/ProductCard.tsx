@@ -54,14 +54,14 @@ const ProductCard = ({
       <div className="flex items-center gap-3 my-3">
         <button
           onClick={onDecrease}
-          className="bg-white border border-[#d1d5db] text-[#1f2937] font-bold px-2.5 py-0.5 rounded cursor-pointer"
+          className="bg-white border border-[#d1d5db] text-[#1f2937] font-bold px-2.5 py-0.5 rounded cursor-pointer transition-colors duration-150 active:bg-[#db2777] active:text-white"
         >
           -
         </button>
         <p className="font-bold text-[#1f2937]">{item.quantity}</p>
         <button
           onClick={onIncrease}
-          className="bg-white border border-[#d1d5db] text-[#1f2937] font-bold px-2.5 py-0.5 rounded cursor-pointer"
+          className="bg-white border border-[#d1d5db] text-[#1f2937] font-bold px-2.5 py-0.5 rounded cursor-pointer transition-colors duration-150 active:bg-[#db2777] active:text-white"
         >
           +
         </button>
