@@ -1,6 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { itemSchema, type ItemFormFields } from "../../schemas/itemSchema";
+import Modal from "../ui/Modal";
 
 const categories = ["Cakes", "Donuts", "Macarons", "Cupcakes", "Cookies"];
 
@@ -56,11 +57,10 @@ const ItemForm = ({ title, submitLabel, defaultValues, onSave, onClose }: ItemFo
   const errorClass = "text-[13px] text-[#b91c1c]";
 
   return (
-    <div onClick={onClose} className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-5">
+    <Modal onClose={onClose}>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        onClick={(e) => e.stopPropagation()}
         className="bg-[#fffafc] w-96 max-w-full rounded-xl p-6 flex flex-col gap-3.5"
       >
         <h2 className="text-lg font-bold text-[#4a2c11]">{title}</h2>
@@ -131,7 +131,7 @@ const ItemForm = ({ title, submitLabel, defaultValues, onSave, onClose }: ItemFo
           </button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 };
 
