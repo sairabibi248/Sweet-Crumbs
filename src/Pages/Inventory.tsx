@@ -3,6 +3,7 @@ import { useInventory } from "../hooks/useInventory";
 import ProductCard from "../components/inventory/ProductCard";
 import SearchBar from "../components/inventory/SearchBar";
 import ItemForm from "../components/inventory/ItemForm";
+import ConfirmDialog from "../components/ui/ConfirmDialog";
 import type { Item } from "../types/item";
 import type { ItemFormFields } from "../schemas/itemSchema";
 
@@ -23,6 +24,7 @@ const Inventory = () => {
 
   const [isAdding, setIsAdding] = useState(false);
   const [editingItem, setEditingItem] = useState<Item | null>(null);
+  const [deletingItem, setDeletingItem] = useState<Item | null>(null);
 
   if (isLoading) return <p>Loading....</p>;
   if (isError) return <p>Something went wrong</p>;
@@ -38,10 +40,18 @@ const Inventory = () => {
     setEditingItem(null);
   };
 
+  const handleDelete = () => {
+    if (!deletingItem) return;
+    deleteItem(deletingItem.id);
+    setDeletingItem(null);
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <p className="text-lg font-semibold text-[#111827] dark:text-[#F4F4F5]">{items.length} items</p>
+        <p className="text-lg font-semibold text-[#111827] dark:text-[#F4F4F5]">
+          {items.length} items
+        </p>
         <button
           onClick={() => setIsAdding(true)}
           className="px-4 py-2 rounded-lg bg-[#C2416C] text-white text-sm font-medium cursor-pointer hover:bg-[#A8345B]"
@@ -62,7 +72,7 @@ const Inventory = () => {
           <ProductCard
             key={item.id}
             item={item}
-            onDelete={deleteItem}
+            onDelete={() => setDeletingItem(item)}
             onIncrease={() => changeQuantity(item, 1)}
             onDecrease={() => changeQuantity(item, -1)}
             onEdit={() => setEditingItem(item)}
@@ -92,6 +102,15 @@ const Inventory = () => {
           }}
           onSave={handleEdit}
           onClose={() => setEditingItem(null)}
+        />
+      )}
+
+      {deletingItem && (
+        <ConfirmDialog
+          title="Delete item?"
+          message={`"${deletingItem.title}" will be removed permanently.`}
+          onConfirm={handleDelete}
+          onCancel={() => setDeletingItem(null)}
         />
       )}
     </div>

@@ -14,13 +14,19 @@ function getStockStatus(quantity: number) {
 
 type ProductCardProps = {
   item: Item;
-  onDelete: (id: string) => void;
+  onDelete: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
   onEdit: () => void;
 };
 
-const ProductCard = ({ item, onDelete, onIncrease, onDecrease, onEdit }: ProductCardProps) => {
+const ProductCard = ({
+  item,
+  onDelete,
+  onIncrease,
+  onDecrease,
+  onEdit,
+}: ProductCardProps) => {
   const stock = getStockStatus(item.quantity);
 
   return (
@@ -37,9 +43,13 @@ const ProductCard = ({ item, onDelete, onIncrease, onDecrease, onEdit }: Product
         />
       </div>
 
-      <h3 className="text-sm font-bold text-[#1f2937] min-h-10 flex items-center">{item.title}</h3>
+      <h3 className="text-sm font-bold text-[#1f2937] min-h-10 flex items-center">
+        {item.title}
+      </h3>
 
-      <p className="text-[13px] font-bold text-[#db2777]">Rs {item.price.toLocaleString()}</p>
+      <p className="text-[13px] font-bold text-[#db2777]">
+        Rs {item.price.toLocaleString()}
+      </p>
 
       <div className="flex items-center gap-3 my-3">
         <button
@@ -57,7 +67,9 @@ const ProductCard = ({ item, onDelete, onIncrease, onDecrease, onEdit }: Product
         </button>
       </div>
 
-      <p className={`w-full rounded py-1 text-xs font-bold ${stock.color}`}>{stock.label}</p>
+      <p className={`w-full rounded py-1 text-xs font-bold ${stock.color}`}>
+        {stock.label}
+      </p>
 
       <div className="flex gap-2 w-full mt-3">
         <button
@@ -67,7 +79,7 @@ const ProductCard = ({ item, onDelete, onIncrease, onDecrease, onEdit }: Product
           Edit
         </button>
         <button
-          onClick={() => onDelete(item.id)}
+          onClick={onDelete}
           className="flex-1 py-1.5 rounded text-xs font-bold cursor-pointer bg-white text-[#b4233f] border border-[#f0c2cc] hover:bg-[#ce4661] hover:text-white"
         >
           Delete
