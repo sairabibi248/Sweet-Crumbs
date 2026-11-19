@@ -46,7 +46,7 @@ const Orders = () => {
         <p className="text-lg font-semibold">{orders.length} orders</p>
         <button
           onClick={() => setIsAdding(true)}
-          className="rounded-lg bg-[#C2416C] px-4 py-2 text-sm font-medium text-white hover:bg-[#a83660]"
+          className="rounded-lg bg-[#C2416C] px-4 py-2 text-sm font-medium text-white hover:bg-[#a83660] cursor-pointer"
         >
           + Add Order
         </button>

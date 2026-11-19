@@ -5,7 +5,6 @@ const links = [
   { name: "Overview", path: "/" },
   { name: "Inventory", path: "/inventory" },
   { name: "Orders", path: "/orders" },
-  { name: "Categories", path: "/categories" },
   { name: "Recipes", path: "/recipes" },
   { name: "Settings", path: "/settings" },
 ];
