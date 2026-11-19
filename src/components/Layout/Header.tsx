@@ -7,7 +7,6 @@ const titles: Record<string, string> = {
   "/inventory": "Inventory",
   "/orders": "Orders",
   "/recipes": "Recipes",
-  "/settings": "Settings",
 };
 
 const Header = () => {
