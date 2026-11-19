@@ -6,7 +6,6 @@ const links = [
   { name: "Inventory", path: "/inventory" },
   { name: "Orders", path: "/orders" },
   { name: "Recipes", path: "/recipes" },
-  { name: "Settings", path: "/settings" },
 ];
 
 const Sidebar = () => {
