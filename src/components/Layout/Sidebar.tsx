@@ -1,12 +1,20 @@
 import logoImg from "../../assets/logo.png";
 import { NavLink } from "react-router";
 
+/**
+ * Pages shown in the sidebar menu.
+ */
+
 const links = [
   { name: "Overview", path: "/" },
   { name: "Inventory", path: "/inventory" },
   { name: "Orders", path: "/orders" },
   { name: "Recipes", path: "/recipes" },
 ];
+
+/**
+ * Left menu with the logo and links to all dashboard pages.
+ */
 
 const Sidebar = () => {
   return (
@@ -42,6 +50,5 @@ const Sidebar = () => {
     </aside>
   );
 };
-
 
 export default Sidebar;

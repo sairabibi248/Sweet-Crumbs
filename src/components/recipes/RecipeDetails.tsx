@@ -4,10 +4,11 @@ import { getRecipeById } from "../../api/recipes";
 import type { RecipeDetail } from "../../types/recipe";
 
 type RecipeDetailsProps = {
+  /** Id of the recipe to load from TheMealDB */
   id: string;
+  /** Runs when the user clicks Close or clicks outside the popup */
   onClose: () => void;
 };
-
 const getIngredients = (recipe: RecipeDetail) => {
   const ingredients: string[] = [];
 
@@ -23,9 +24,18 @@ const getIngredients = (recipe: RecipeDetail) => {
   return ingredients;
 };
 
+/**
+ * Popup that shows the full recipe with image and ingredients and steps.
+ * Loads the recipe only when the popup opens.
+ * Used on the Recipes page.
+ */
+
 const RecipeDetails = ({ id, onClose }: RecipeDetailsProps) => {
   const {
-    data: recipe,isLoading, isError, } = useQuery({
+    data: recipe,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["recipe", id],
     queryFn: () => getRecipeById(id),
   });
@@ -38,7 +48,9 @@ const RecipeDetails = ({ id, onClose }: RecipeDetailsProps) => {
         )}
 
         {isError && (
-          <p className="py-10 text-center text-red-500">Could not load recipe.</p>
+          <p className="py-10 text-center text-red-500">
+            Could not load recipe.
+          </p>
         )}
 
         {recipe && (
@@ -66,7 +78,9 @@ const RecipeDetails = ({ id, onClose }: RecipeDetailsProps) => {
             </div>
 
             <div>
-              <h3 className="mb-2 font-semibold text-[#4a2c11]">Instructions</h3>
+              <h3 className="mb-2 font-semibold text-[#4a2c11]">
+                Instructions
+              </h3>
               <p className="whitespace-pre-line text-sm text-[#374151]">
                 {recipe.strInstructions}
               </p>

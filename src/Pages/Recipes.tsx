@@ -4,12 +4,20 @@ import { getDesserts } from "../api/recipes";
 import RecipeCard from "../components/recipes/RecipeCard";
 import RecipeDetails from "../components/recipes/RecipeDetails";
 
+/**
+ * Recipes page that shows dessert recipes from TheMealDB public API.
+ * Lets the user search desserts by name and open a recipe in a popup.
+ */
+
 const Recipes = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const {
-    data: recipes = [], isLoading,isError,} = useQuery({
+    data: recipes = [],
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["desserts"],
     queryFn: getDesserts,
   });

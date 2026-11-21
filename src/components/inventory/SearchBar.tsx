@@ -1,9 +1,14 @@
 type SearchBarProps = {
+  /** Text typed in the search box */
   searchTerm: string;
+  /** Updates the search text in useInventory */
   setSearchTerm: (value: string) => void;
+  /** Category button that is selected now */
   activeCategory: string;
+  /** Changes the selected category in useInventory */
   setActiveCategory: (category: string) => void;
 };
+
 const SearchBar = ({
   searchTerm,
   setSearchTerm,

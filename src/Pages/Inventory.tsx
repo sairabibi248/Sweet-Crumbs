@@ -7,6 +7,12 @@ import ConfirmDialog from "../components/ui/ConfirmDialog";
 import type { Item } from "../types/item";
 import type { ItemFormFields } from "../schemas/itemSchema";
 
+/**
+ * Inventory page that shows all products as cards.
+ * Gets products and all functions from useInventory.
+ * Lets the user search and filter and add and edit and delete products.
+ */
+
 const Inventory = () => {
   const {
     items,
@@ -29,10 +35,25 @@ const Inventory = () => {
   if (isLoading) return <p>Loading....</p>;
   if (isError) return <p>Something went wrong</p>;
 
+    /**
+   * Saves a new product and closes the Add Item form.
+   * Called when the user submits the Add Item form.
+   *
+   * @param data Product details from the form
+   */
+
+
   const handleAdd = (data: ItemFormFields) => {
     addItem(data);
     setIsAdding(false);
   };
+
+   /**
+   * Saves the edited product and closes the Edit form.
+   * Keeps the same id and replaces the other details.
+   *
+   * @param data New product details from the form
+   */
 
   const handleEdit = (data: ItemFormFields) => {
     if (!editingItem) return;
@@ -40,6 +61,11 @@ const Inventory = () => {
     setEditingItem(null);
   };
 
+   /**
+   * Deletes the selected product and closes the dialog.
+   * Called when the user clicks Delete in the confirm dialog.
+   */
+  
   const handleDelete = () => {
     if (!deletingItem) return;
     deleteItem(deletingItem.id);

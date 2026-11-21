@@ -5,12 +5,18 @@ import { useInventory } from "../../hooks/useInventory";
 import { orderSchema, type OrderFormFields } from "../../schemas/orderSchema";
 
 type OrderFormProps = {
+  /** Runs with the form data when the form is valid and submitted */
   onSave: (data: OrderFormFields) => void;
+  /** Runs when the user clicks Cancel or clicks outside the popup */
   onClose: () => void;
 };
 
-const inputClass =
-  "w-full rounded-lg border border-[#fbcfe8] bg-white px-4 py-3 font-semibold text-[#111827] outline-none placeholder:text-[#9ca3af] focus:border-[#C2416C]";
+/**
+ * Popup form to add a new order.
+ * The form is checked with React Hook Form and Zod using orderSchema.
+ */
+
+const inputClass = "w-full rounded-lg border border-[#fbcfe8] bg-white px-4 py-3 font-semibold text-[#111827] outline-none placeholder:text-[#9ca3af] focus:border-[#C2416C]";
 
 const labelClass = "block mb-2 text-sm font-semibold text-[#7a5c43]";
 
