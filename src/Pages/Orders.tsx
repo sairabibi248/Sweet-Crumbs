@@ -5,6 +5,11 @@ import ConfirmDialog from "../components/ui/ConfirmDialog";
 import type { Order, OrderStatus } from "../types/order";
 import type { OrderFormFields } from "../schemas/orderSchema";
 
+/**
+ * Add colors for each order status.
+ *  * Used on the status dropdown in the table.
+ */
+
 const statusColors: Record<OrderStatus, string> = {
   Pending: "bg-[#fef9c3] text-[#a16207]",
   Completed: "bg-[#dcfce7] text-[#15803d]",
@@ -13,6 +18,11 @@ const statusColors: Record<OrderStatus, string> = {
 
 const optionClass =
   "bg-white text-[#111827] dark:bg-[#18191C] dark:text-[#F4F4F5]";
+
+/**
+ * Orders page that shows all orders in a table.
+ * Lets the user add an order and change its status and delete it.
+ */
 
 const Orders = () => {
   const orders = useOrderStore((state) => state.orders);
@@ -32,6 +42,11 @@ const Orders = () => {
     setIsAdding(false);
   };
 
+  /**
+   * Deletes the selected order and closes the dialog.
+   * Called when the user clicks Delete in the confirm dialog.
+   */
+
   const handleDelete = () => {
     if (!deletingOrder) return;
     deleteOrder(deletingOrder.id);
@@ -40,8 +55,6 @@ const Orders = () => {
 
   return (
     <div className="flex flex-col gap-6">
-     
-
       <div className="flex items-center justify-between">
         <p className="text-lg font-semibold">{orders.length} orders</p>
         <button
@@ -112,10 +125,7 @@ const Orders = () => {
       </div>
 
       {isAdding && (
-        <OrderForm
-          onSave={handleAdd}
-          onClose={() => setIsAdding(false)}
-        />
+        <OrderForm onSave={handleAdd} onClose={() => setIsAdding(false)} />
       )}
 
       {deletingOrder && (

@@ -1,9 +1,15 @@
 import type { RecipeSummary } from "../../types/recipe";
 
 type RecipeCardProps = {
+  /** Recipe to show with its name and image */
   recipe: RecipeSummary;
+  /** Runs when the user clicks View recipe and opens the details popup */
   onView: () => void;
 };
+
+/**
+ * Card that shows one dessert with its image and name.
+ */
 
 const RecipeCard = ({ recipe, onView }: RecipeCardProps) => {
   return (

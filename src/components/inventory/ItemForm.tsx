@@ -18,6 +18,8 @@ const images = [
   "/images/Macaron2.png",
 ];
 
+/** Starting values of the form when a new item is added */
+
 const emptyItem: ItemFormFields = {
   title: "",
   category: "Cakes",
@@ -27,14 +29,25 @@ const emptyItem: ItemFormFields = {
 };
 
 type ItemFormProps = {
+  /** Heading of the form like Add new item or Edit item */
   title: string;
+  /** Text of the submit button like Add item or Save changes */
   submitLabel: string;
+  /** Values to fill the form with when editing. Empty when adding */
   defaultValues?: ItemFormFields;
+  /** Runs with the form data when the form is valid and submitted */
   onSave: (data: ItemFormFields) => void;
+  /** Runs when the user clicks Cancel or clicks outside the popup */
   onClose: () => void;
 };
 
-const ItemForm = ({ title, submitLabel, defaultValues, onSave, onClose }: ItemFormProps) => {
+const ItemForm = ({
+  title,
+  submitLabel,
+  defaultValues,
+  onSave,
+  onClose,
+}: ItemFormProps) => {
   const {
     register,
     handleSubmit,
@@ -86,7 +99,11 @@ const ItemForm = ({ title, submitLabel, defaultValues, onSave, onClose }: ItemFo
 
         <label className={labelClass}>
           Name
-          <input {...register("title")} placeholder="Blueberry Muffin" className={inputClass} />
+          <input
+            {...register("title")}
+            placeholder="Blueberry Muffin"
+            className={inputClass}
+          />
         </label>
         {errors.title && <p className={errorClass}>{errors.title.message}</p>}
 
@@ -100,20 +117,32 @@ const ItemForm = ({ title, submitLabel, defaultValues, onSave, onClose }: ItemFo
             ))}
           </select>
         </label>
-        {errors.category && <p className={errorClass}>{errors.category.message}</p>}
+        {errors.category && (
+          <p className={errorClass}>{errors.category.message}</p>
+        )}
 
         <div className="flex gap-3">
           <label className={labelClass}>
             Price (Rs)
-            <input {...register("price", { valueAsNumber: true })} type="number" className={inputClass} />
+            <input
+              {...register("price", { valueAsNumber: true })}
+              type="number"
+              className={inputClass}
+            />
           </label>
           <label className={labelClass}>
             Quantity
-            <input {...register("quantity", { valueAsNumber: true })} type="number" className={inputClass} />
+            <input
+              {...register("quantity", { valueAsNumber: true })}
+              type="number"
+              className={inputClass}
+            />
           </label>
         </div>
         {errors.price && <p className={errorClass}>{errors.price.message}</p>}
-        {errors.quantity && <p className={errorClass}>{errors.quantity.message}</p>}
+        {errors.quantity && (
+          <p className={errorClass}>{errors.quantity.message}</p>
+        )}
 
         <div className="flex justify-end gap-2.5">
           <button

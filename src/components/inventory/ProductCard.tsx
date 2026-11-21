@@ -1,5 +1,7 @@
 import type { Item } from "../../types/item";
 
+/** A product is marked as Low Stock when its quantity is below this number */
+
 const lowStockLimit = 5;
 
 function getStockStatus(quantity: number) {
@@ -13,10 +15,15 @@ function getStockStatus(quantity: number) {
 }
 
 type ProductCardProps = {
+  /** Product to show on the card */
   item: Item;
+  /** Runs when the user clicks Delete and opens the confirm dialog */
   onDelete: () => void;
+  /** Runs when the user clicks + to add one unit */
   onIncrease: () => void;
+  /** Runs when the user clicks - to remove one unit */
   onDecrease: () => void;
+  /** Runs when the user clicks Edit and opens the Edit form */
   onEdit: () => void;
 };
 

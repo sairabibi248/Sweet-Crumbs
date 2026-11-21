@@ -2,9 +2,13 @@ import { create } from "zustand";
 import type { Order, OrderStatus } from "../types/order";
 
 type OrderStore = {
+  /** All orders shown in the Orders table */
   orders: Order[];
+  /** Adds a new order to the end of the list */
   addOrder: (order: Order) => void;
+  /** Changes the status of one order by its id */
   updateStatus: (id: string, status: OrderStatus) => void;
+  /** Removes one order by its id */
   deleteOrder: (id: string) => void;
 };
 
@@ -41,7 +45,7 @@ export const useOrderStore = create<OrderStore>()((set) => ({
   updateStatus: (id, status) =>
     set((state) => ({
       orders: state.orders.map((order) =>
-        order.id === id ? { ...order, status } : order
+        order.id === id ? { ...order, status } : order,
       ),
     })),
 

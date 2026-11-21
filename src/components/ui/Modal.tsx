@@ -2,7 +2,9 @@ import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 
 type ModalProps = {
+  /** Content shown inside the popup like a form or a dialog */
   children: ReactNode;
+  /** Runs when the user clicks outside the popup */
   onClose: () => void;
 };
 
@@ -14,7 +16,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
     >
       <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>,
-    document.body
+    document.body,
   );
 };
 

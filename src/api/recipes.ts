@@ -10,6 +10,14 @@ type RecipeDetailResponse = {
   meals: RecipeDetail[] | null;
 };
 
+/**
+ * Gets all dessert recipes from TheMealDB.
+ * Method GET.
+ * Used by useQuery on the Recipes page.
+ *
+ * @returns The list of desserts or an empty list if nothing is found
+ */
+
 export const getDesserts = async (): Promise<RecipeSummary[]> => {
   const response = await fetch(`${mealApiUrl}/filter.php?c=Dessert`);
 
@@ -20,6 +28,15 @@ export const getDesserts = async (): Promise<RecipeSummary[]> => {
   const data: RecipesResponse = await response.json();
   return data.meals ?? [];
 };
+
+/**
+ * Gets the full details of one recipe from TheMealDB.
+ * Method GET.
+ * Used by useQuery in the RecipeDetails popup.
+ *
+ * @param id Id of the recipe
+ * @returns The full recipe with ingredients and steps
+ */
 
 export const getRecipeById = async (id: string): Promise<RecipeDetail> => {
   const response = await fetch(`${mealApiUrl}/lookup.php?i=${id}`);

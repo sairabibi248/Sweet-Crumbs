@@ -1,13 +1,27 @@
 import Modal from "./Modal";
 
 type ConfirmDialogProps = {
+  /** Heading of the dialog */
   title: string;
+  /** Text that explains what will happen */
   message: string;
+  /** Runs when the user clicks Delete */
   onConfirm: () => void;
+  /** Runs when the user clicks Cancel or clicks outside the dialog */
   onCancel: () => void;
 };
 
-const ConfirmDialog = ({ title, message, onConfirm, onCancel }: ConfirmDialogProps) => {
+/**
+ * Popup that asks the user to confirm before deleting something.
+ */
+
+const ConfirmDialog = ({
+  title,
+  message,
+  onConfirm,
+  onCancel,
+}: ConfirmDialogProps) => {
+  
   return (
     <Modal onClose={onCancel}>
       <div className="bg-white w-80 max-w-full rounded-xl p-6 flex flex-col gap-3">
